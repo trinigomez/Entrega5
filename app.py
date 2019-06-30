@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, abort, json
 from pymongo import MongoClient
 import pandas as pd
-import matplotlib.pyplot as plt
 import os
 import atexit
 import subprocess
 
-client = MongoClient("localhost")
-db = client["entrega"]
+uri = "mongodb://grupo30:grupo30@146.155.13.149/grupo30?authSource=admin"
+# La uri 'estándar' es "mongodb://user:password@ip/database?authSource=admin"
+client = MongoClient(uri)
+db = client.get_database()
 mensajes = db.mensajes
 informacion2 = db.usuario
 app = Flask(__name__)
@@ -19,17 +20,17 @@ MESSAGE_KEYS = ['message', 'sender', 'receptant', 'lat', 'long','date']
 def inicio():
     return "<h1>Entrega 4 Grupo 16</h1>"
 
-@app.route("/recibidos_usuario/<int:mid>")
-def recibidos_mensaje(mid):
-    mensaje = list(mensajes.find({"receptant": mid}, {"_id": 0}))
+@app.route("/mensaje_usuario/<int:mid>")
+def informacion_mensaje(mid):
+    mensaje = list(mensajes.find({"sender": mid}, {"_id": 0}))
     usuario = list(informacion2.find({"id": mid}, {"_id": 0}))
     final = mensaje+usuario
     hola = json.jsonify(final)
     return hola
 
-@app.route("/mensaje_usuario/<int:mid>")
+@app.route("/recibidos_usuario/<int:mid>")
 def informacion_mensaje(mid):
-    mensaje = list(mensajes.find({"sender": mid}, {"_id": 0}))
+    mensaje = list(mensajes.find({"receptant": mid}, {"_id": 0}))
     usuario = list(informacion2.find({"id": mid}, {"_id": 0}))
     final = mensaje+usuario
     hola = json.jsonify(final)
