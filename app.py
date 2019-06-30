@@ -29,7 +29,7 @@ def informacion_mensaje(mid):
     return hola
 
 @app.route("/recibidos_usuario/<int:mid>")
-def informacion_mensaje(mid):
+def recibidos_mensaje(mid):
     mensaje = list(mensajes.find({"receptant": mid}, {"_id": 0}))
     usuario = list(informacion2.find({"id": mid}, {"_id": 0}))
     final = mensaje+usuario
