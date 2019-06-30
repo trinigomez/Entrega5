@@ -4,7 +4,7 @@ import pandas as pd
 import os
 import atexit
 import subprocess
-import datetime
+from datetime import datetime
 
 uri = "mongodb://grupo30:grupo30@146.155.13.149/grupo30?authSource=admin"
 # La uri 'estándar' es "mongodb://user:password@ip/database?authSource=admin"
@@ -39,8 +39,8 @@ def recibidos_mensaje(mid):
 
 @app.route("/fechas/<str:d>/<str:s>")
 def mensajes_dias(d, s):
-    date_time_obj = datetime.datetime.strptime(d, '%Y-%m-%d ')
-    date_time_obj_final = datetime.datetime.strptime(s, '%Y-%m-%d')
+    date_time_obj = datetime.strptime(d, '%Y-%m-%d ')
+    date_time_obj_final = datetime.strptime(s, '%Y-%m-%d')
     m = list(mensajes.find({'date': {'$lt': date_time_obj_final, '$gte': date_time_obj}}))
     return json.jsonify(m)
 
