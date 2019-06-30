@@ -37,11 +37,11 @@ def recibidos_mensaje(mid):
     hola = json.jsonify(final)
     return hola
 
-#def mensajes_dias(d, s):
-#    date_time_obj = datetime.datetime.strptime(d, '%Y-%m-%d ')
-#    date_time_obj_final = datetime.datetime.strptime(s, '%Y-%m-%d')
-#    m = list(mensajes.find({'date': {'$lt': date_time_obj_final, '$gte': date_time_obj}}))
-#    return json.jsonify(m)
+def mensajes_dias(d, s):
+    date_time_obj = datetime.datetime.strptime(d, '%Y-%m-%d ')
+    date_time_obj_final = datetime.datetime.strptime(s, '%Y-%m-%d')
+    m = list(mensajes.find({'date': {'$lt': date_time_obj_final, '$gte': date_time_obj}}))
+    return json.jsonify(m)
 
 
 @app.route("/informacion_mensaje/<int:mid>")
