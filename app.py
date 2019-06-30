@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import atexit
 import subprocess
+import datetime
 
 uri = "mongodb://grupo30:grupo30@146.155.13.149/grupo30?authSource=admin"
 # La uri 'estándar' es "mongodb://user:password@ip/database?authSource=admin"
