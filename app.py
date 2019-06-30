@@ -37,6 +37,7 @@ def recibidos_mensaje(mid):
     hola = json.jsonify(final)
     return hola
 
+@app.route("/fechas/<str:d>/<str:s>")
 def mensajes_dias(d, s):
     date_time_obj = datetime.datetime.strptime(d, '%Y-%m-%d ')
     date_time_obj_final = datetime.datetime.strptime(s, '%Y-%m-%d')
