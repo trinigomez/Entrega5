@@ -23,7 +23,7 @@ def inicio():
 
 @app.route("/mensaje_usuario/<int:mid>")
 def informacion_mensaje(mid):
-    mensaje = list(mensajes.find({"sender": mid}, {"_id": 0, "id": 0, "lat": 0, "long": 0}))
+    mensaje = list(mensajes.find({"sender": mid}, {"_id": 0, "id": 0}))
     usuario = list(informacion2.find({"id": mid}, {"_id": 0}))
     final = mensaje+usuario
     hola = json.jsonify(final)
@@ -31,7 +31,7 @@ def informacion_mensaje(mid):
 
 @app.route("/recibidos_usuario/<int:mid>")
 def recibidos_mensaje(mid):
-    mensaje = list(mensajes.find({"receptant": mid}, {"_id": 0, "id": 0, "lat": 0, "long": 0}))
+    mensaje = list(mensajes.find({"receptant": mid}, {"_id": 0, "id": 0}))
     usuario = list(informacion2.find({"id": mid}, {"_id": 0}))
     final = mensaje+usuario
     hola = json.jsonify(final)
