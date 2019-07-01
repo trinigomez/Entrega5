@@ -85,13 +85,13 @@ def search(texto):
 
 @app.route('/mensaje3/<string:texto>')
 def search_without(texto):
-    texto = ' "' + texto
+    texto = '"' + texto
     texto = texto.replace(" ", '" -"')
     texto = texto + '"'
-
+    print(texto)
     mensajes.createIndex([("message", "text")])
 
-    m = list(mensajes.find({"$text": {"$search": texto}}, {"message": 1}))
+    m = list(mensajes.find({"$text": {"$search": texto}}, {"message": 1, "_id": 0}))
 
 
     return json.jsonify(m)
