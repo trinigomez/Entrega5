@@ -89,7 +89,7 @@ def search_without(texto):
     texto = texto.replace(" ", '" -"')
     texto = texto + '"'
     print(texto)
-    mensajes.createIndex([("message", "text")])
+    mensajes.create_index([("message", "text")])
 
     m = list(mensajes.find({"$text": {"$search": texto}}, {"message": 1, "_id": 0}))
 
